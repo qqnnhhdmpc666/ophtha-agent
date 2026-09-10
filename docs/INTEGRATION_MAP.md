@@ -8,7 +8,7 @@ The new project is a composition layer, not a destructive merge:
 |---|---|---|
 | `居丽叶简历项目1：智能客服Agent` | LangGraph state/workflow patterns, API and tool orchestration | Do not copy its `.env`, logs, database data or frontend build artifacts |
 | `low-resource-fundus-qa` | FAISS/BM25/Cross-Encoder retrieval and ophthalmology corpus | Expose retrieval-only methods through `LegacyFundusBackend` |
-| `ChatGLM-RecAlign` | QLoRA/SFT/ORPO configs and evaluation discipline | Keep training separate from online Agent runtime |
+| `ChatGLM-RecAlign` | Historical QLoRA/recommendation reference only | Not included in this Agent runtime |
 | `Finance/Financial-MCP-Agent` | MCP tool wrapping pattern | Do not import financial prompts or claims into medical flow |
 | PPT and math GRPO projects | None in v0 | Different action space and verifier |
 
@@ -24,6 +24,6 @@ The upstream `EyeQASystem` also loads its own generation model during initializa
 - LangGraph compilation: passed;
 - no-overwrite trace: passed;
 - citation gate and bounded retry: passed;
+- DPO/ORPO/GRPO: deliberately out of scope;
 - real medical effectiveness: not checked offline;
 - real upstream FAISS/Reranker assets: not checked because the cloned repository has no committed model checkpoint or built FAISS directory.
-

@@ -28,7 +28,7 @@
 - 将原有线性 RAG 流程封装为有状态 Agent，保留 FAISS、BM25 和 Cross-Encoder 作为领域检索后端；
 - 实现 Evidence Verifier，对回答中的证据 ID 与当前检索结果进行一致性校验；证据不足时最多重检索一次，仍不足则安全拒答；
 - 设计 JSONL trace 记录请求、检索候选、验证结果、重试次数和终止状态，支持后续离线评测与训练数据筛选；
-- 建立 fixed RAG、Agent-RAG 和后续 QLoRA 版本的统一评测接口，比较证据支持率、引用准确率、回答质量、拒答率、延迟和工具调用成本。
+- 建立 fixed RAG 与 Agent-RAG 的统一评测接口，比较证据支持率、引用准确率、回答质量、拒答率、延迟和工具调用成本。
 
 ## 暂时不能直接写成结果的内容
 
@@ -37,7 +37,7 @@
 - Agent 相对 fixed RAG 的提升百分比；
 - 证据支持率、引用准确率和安全拒答率；
 - Agent 平均工具调用次数与延迟；
-- QLoRA 或 ORPO 对 Agent 指标的具体增益；
+- 原有 QLoRA baseline 与 Agent-RAG 的具体差异；
 - 任何“显著降低幻觉”的定量结论。
 
 ## 最终简历模板
@@ -49,6 +49,5 @@
 - 基于混合检索、重排序和 QLoRA 构建低资源眼底病 RAG 系统，并完成多种检索策略及 Type-Aware 路由对照实验；
 - 在原有 RAG 后端之上实现 LangGraph 状态化 Agent，统一编排检索、重排序、回答生成和证据验证节点；
 - 设计 Evidence Verifier 与有界重检索策略，将回答引用绑定到实际检索文档，证据不足时触发安全拒答；
-- 构建可回放 JSONL 工具轨迹和统一评测接口，比较 fixed RAG、Agent-RAG 和 QLoRA 版本在回答质量、证据支持率、引用准确率和推理成本上的差异；
-- 原始 hybrid-rerank 实验 Judge Score 达到 4.585，较基线提升 3–8%；Agent 和后训练版本结果待真实实验完成后补充。
-
+- 构建可回放 JSONL 工具轨迹和统一评测接口，比较 fixed RAG 与 Agent-RAG 在回答质量、证据支持率、引用准确率和推理成本上的差异；
+- 原始 hybrid-rerank 实验 Judge Score 达到 4.585，较基线提升 3–8%；Agent-RAG 的结果待真实实验完成后补充。

@@ -4,7 +4,7 @@
 
 GitHub: https://github.com/qqnnhhdmpc666/ophtha-agent
 
-原项目的 RAG、QLoRA、Type-Aware 和 Evidence Traceability 结果保留；本目录增加状态化 Agent、证据验证和可回放轨迹，不覆盖原实验结论。简历升级稿见 `docs/RESUME_UPGRADE.md`。
+原项目的 RAG、QLoRA、Type-Aware 和 Evidence Traceability 结果保留；本目录只增加状态化 Agent、证据验证和可回放轨迹，不扩展 DPO、ORPO、GRPO 或其他训练流程。简历升级稿见 `docs/RESUME_UPGRADE.md`。
 
 本目录不复制或破坏桌面上的原项目，而是通过适配器接入它的检索能力：
 
@@ -77,7 +77,7 @@ result = agent.run("什么是干眼？")
 
 - 智能客服项目：可复用 LangGraph、API、状态管理和多工具编排思路；
 - 眼底 RAG：提供真正的医疗知识检索后端；
-- ChatGLM-RecAlign：保留为独立 QLoRA/ORPO 训练管线；
+- ChatGLM-RecAlign：不接入本 Agent 运行时；原项目的 QLoRA 结果只作为既有 baseline；
 - Finance/PPT/数学 GRPO：暂不混入医疗 Agent 主线。
 
-训练之前必须先完成真实检索适配器、证据绑定和 baseline 对比。当前 Mock 结果只能证明工程链路可运行，不能当作医学效果。
+当前版本只验证 Agent 工程链路。真实模型、真实 FAISS 索引和医学效果对比仍需单独运行，不能用 Mock 结果代替。

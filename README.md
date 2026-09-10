@@ -26,6 +26,8 @@ Evidence Verifier
 - Evidence Verifier，拒绝没有有效证据引用的回答；
 - 单次重检索上限，避免小模型循环；
 - JSONL 轨迹记录和 no-overwrite 检查；
+- 公共 QA JSONL 的答案隔离读取器和 CPU 词法检索 fallback；
+- 统一评测摘要和可选 FastAPI `/health`、`/query` 接口；
 - CPU-only Mock 端到端测试；
 - 可选 LangGraph 实现，未安装 LangGraph 时仍可运行确定性 fallback。
 
@@ -36,6 +38,16 @@ cd "C:\Users\31552\Documents\my enhance project\ophtha-agent"
 python -m pytest -q
 python -m ophtha_agent.cli --mock
 ```
+
+使用上游公开 QA JSONL 做无答案泄漏的 CPU 检索 smoke：
+
+```powershell
+python -m ophtha_agent.cli --mock `
+  --corpus vendor\low-resource-fundus-qa\fundus_finetune.jsonl `
+  --max-docs 200
+```
+
+默认不会把 JSONL 的 `answer/output` 字段放进检索证据。该公共 QA 文件可以用于数据格式和训练候选审计，不能直接当作经过临床审核的知识库。
 
 ## 接入现有眼底 RAG
 

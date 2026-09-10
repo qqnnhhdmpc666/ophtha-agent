@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from ophtha_agent import EvidenceVerifier, MockAnswerModel, MockRAGBackend, OphthaAgent
+from ophtha_agent import EvidenceVerifier, JsonlCorpusBackend, MockAnswerModel, MockRAGBackend, OphthaAgent, evaluate_questions
 from ophtha_agent.adapters.legacy_fundus import LegacyFundusBackend
 from ophtha_agent.schemas import RetrievedEvidence
 
@@ -79,3 +79,32 @@ def test_langgraph_workflow_compiles_and_runs():
     state = graph.invoke({"question": "什么是干眼？", "attempt": 0, "max_retries": 1})
     assert state["status"] == "answered"
     assert state["verification"]["supported"] is True
+
+
+def test_jsonl_corpus_backend_reads_upstream_shape(tmp_path: Path):
+    corpus = tmp_path / "qa.jsonl"
+    corpus.write_text(
+        '{"question":"什么是干眼？","answer":"泪液不足或蒸发过快。","source":"test"}\n',
+        encoding="utf-8",
+    )
+    backend = JsonlCorpusBackend.from_jsonl(str(corpus))
+    docs = backend.rerank("干眼", backend.retrieve("干眼", top_k=1))
+    assert docs[0].doc_id == "corpus-000000"
+    assert "什么是干眼" in docs[0].text
+    assert "泪液" not in docs[0].text
+
+
+def test_jsonl_backend_does_not_leak_answer_by_default(tmp_path: Path):
+    corpus = tmp_path / "qa.jsonl"
+    corpus.write_text(
+        '{"question":"什么是干眼？","answer":"秘密标准答案。"}\n',
+        encoding="utf-8",
+    )
+    docs = JsonlCorpusBackend.from_jsonl(str(corpus)).retrieve("干眼", top_k=1)
+    assert "秘密标准答案" not in docs[0].text
+
+
+def test_evaluation_summary_is_reproducible_shape():
+    summary = evaluate_questions(OphthaAgent(MockRAGBackend()), ["什么是干眼？"])
+    assert summary["count"] == 1
+    assert summary["evidence_supported_rate"] == 1.0

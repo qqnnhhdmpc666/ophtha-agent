@@ -1,0 +1,18 @@
+# Reservation template for offline preference alignment.
+enabled: false
+method: orpo
+base_model: ${POLICY_MODEL_PATH}
+adapter_name_or_path: runs/sft_qlora
+dataset: data/orpo_pairs.jsonl
+prompt_field: prompt
+chosen_field: chosen
+rejected_field: rejected
+pref_beta: 0.1
+load_in_4bit: true
+adapter: lora
+lora_rank: 16
+lora_alpha: 32
+cutoff_len: 2048
+output_dir: runs/orpo_qlora
+overwrite_output_dir: false
+

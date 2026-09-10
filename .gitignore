@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+*.egg-info/
+runs/
+.env
+vendor/*
+!vendor/low-resource-fundus-qa/LICENSE
+

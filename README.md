@@ -2,6 +2,8 @@
 
 一个可以直接挂在现有眼底病 RAG 项目上的 Agent 外壳。
 
+GitHub: https://github.com/qqnnhhdmpc666/ophtha-agent
+
 原项目的 RAG、QLoRA、Type-Aware 和 Evidence Traceability 结果保留；本目录增加状态化 Agent、证据验证和可回放轨迹，不覆盖原实验结论。简历升级稿见 `docs/RESUME_UPGRADE.md`。
 
 本目录不复制或破坏桌面上的原项目，而是通过适配器接入它的检索能力：

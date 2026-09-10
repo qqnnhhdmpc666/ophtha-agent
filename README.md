@@ -39,15 +39,20 @@ python -m pytest -q
 python -m ophtha_agent.cli --mock
 ```
 
+启动 CPU Mock HTTP 服务：
+
+```powershell
+python -m uvicorn scripts.run_mock_api:app --reload
+```
+
 使用上游公开 QA JSONL 做无答案泄漏的 CPU 检索 smoke：
 
 ```powershell
 python -m ophtha_agent.cli --mock `
-  --corpus vendor\low-resource-fundus-qa\fundus_finetune.jsonl `
-  --max-docs 200
+  --corpus data\smoke_qa.jsonl
 ```
 
-默认不会把 JSONL 的 `answer/output` 字段放进检索证据。该公共 QA 文件可以用于数据格式和训练候选审计，不能直接当作经过临床审核的知识库。
+默认不会把 JSONL 的 `answer/output` 字段放进检索证据。公共 QA 文件可以用于数据格式和训练候选审计，不能直接当作经过临床审核的知识库。上游数据接入说明见 `docs/UPSTREAM_DATA.md`。
 
 ## 接入现有眼底 RAG
 

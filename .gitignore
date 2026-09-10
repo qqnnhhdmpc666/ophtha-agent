@@ -5,4 +5,4 @@ runs/
 .env
 vendor/*
 !vendor/low-resource-fundus-qa/LICENSE
-
+!data/*.jsonl

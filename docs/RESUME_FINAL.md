@@ -4,7 +4,7 @@
 
 ## 项目名称
 
-**低资源眼底病智能问答系统（RAG + QLoRA + Evidence-aware Agent）**
+**低资源眼底病智能问答系统（RAG + QLoRA）**
 
 ## 项目描述
 
@@ -20,7 +20,7 @@ Python｜QLoRA｜FAISS｜BM25｜Cross-Encoder｜Sentence-Transformers｜LangGrap
 - 实现 MarianMT 中英互译、BM25 与向量检索加权融合，并结合 Cross-Encoder 重排序，完成 vector、hybrid、vector-rerank 和 hybrid-rerank 对照实验；
 - 设计 Type-Aware 检索策略，针对日常建议、疾病定义、决策和紧急情况分析不同检索配置的适用性；
 - 设计结构化 Prompt、知识约束生成和确定性解码策略，减少无证据回答和不安全医疗建议；
-- 将原有 Evidence Traceability 扩展为 LangGraph 状态化 Agent，封装检索、重排序、生成和 Evidence Verifier 工具，采用显式状态、固定重试上限和安全拒答；使用 Pydantic 约束工具输入输出并记录可回放 Agent trace；
+- 在原有 RAG 流程上补充轻量级 LangGraph Agent 层，以显式状态编排检索、生成、证据核验与有限重试，并记录可回放 trace，体现系统化 Agent 工程设计；
 - 原有 hybrid-rerank 实验 Judge Score 达到 4.585，相关指标较基线提升 3–8%；Agent overlay 的新增收益在统一真实测试完成后填入，不提前虚构。
 
 ## 一句话版本

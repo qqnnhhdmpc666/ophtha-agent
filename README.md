@@ -1,10 +1,10 @@
 # Ophtha-Agent
 
-一个可以直接挂在现有眼底病 RAG 项目上的 Agent 外壳。
+一个挂在现有眼底病 RAG 项目上的 Agent 外壳。项目核心仍是原有 RAG + QLoRA；Agent 负责状态化编排、证据验证和安全终止。
 
 GitHub: https://github.com/qqnnhhdmpc666/ophtha-agent
 
-原项目的 RAG、QLoRA、Type-Aware 和 Evidence Traceability 结果保留；本目录只增加状态化 Agent、证据验证和可回放轨迹，不扩展 DPO、ORPO、GRPO 或其他训练流程。简历升级稿见 `docs/RESUME_UPGRADE.md`。
+原项目的 RAG、QLoRA、Type-Aware 和 Evidence Traceability 结果保留；本目录只增加状态化 Agent、证据验证和可回放轨迹，不扩展 DPO、ORPO、GRPO 或其他训练流程。最终简历版本见 `docs/RESUME_FINAL.md`，Agent 设计见 `docs/AGENT_DESIGN.md`。
 
 本目录不复制或破坏桌面上的原项目，而是通过适配器接入它的检索能力：
 
